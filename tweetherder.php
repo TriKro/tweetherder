@@ -31,8 +31,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
   This is the only thing that needs to be set.
 */
 
-$twittername = "TriKro";
-
 /**
   Set up the shortcode
 */
@@ -41,8 +39,15 @@ function tweet_herder( $atts, $content = null ) {
   extract( shortcode_atts( array (
     'href' => get_permalink( $post->ID )
   ), $atts ) );
-  global $twittername;
-  return '<a href="http://twitter.com/share?url='.$href.'&text='.$content.'&via='.$twittername.'" rel="nofollow" title="Click here to tweet this." target="_blank" class="tweetherder">'.$content.'</a>';
+  
+  $options     = get_option('tweetherder_options');
+  $twittername = $options['twitter_name'];
+  $custom_css  = $options['custom_css'];
+  
+  $share_link  = "http://twitter.com/share?url=$href&text=$content&via=$twittername&related=$twittername";
+  $style_attr  = empty($custom_css) ? '' : 'style="' . $custom_css . '"';
+  
+  return '<a href="'. $share_link . '" rel="nofollow" title="Click here to tweet this." target="_blank" class="tweetherder" '. $style_attr . ' >'.$content.'</a>';
 }
 
 /**
