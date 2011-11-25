@@ -7,12 +7,12 @@
 Plugin Name: Tweet Herder
 Plugin URI: http://grasshopperherder.com/
 Description: Adds TinyMCE button for Tweeting selected text in a post.
-Author: Travis Vocino and Tristan Kromer
+Author: Travis Vocino, Tristan Kromer, Peter Backx
 Version: 1.0
 Author URI: http://grasshopperherder.com/
 License: GPLv2
 
-Copyright 2011 Tristan Kromer, Peter Backx (email : tristan@grasshopperherder.com)
+Copyright 2011 Tristan Kromer, Peter Backx, Travis Vocino (email : tristan@grasshopperherder.com)
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2 of the License, or
@@ -97,3 +97,33 @@ function tweetherder_css() {
 add_action( 'wp_head', 'tweetherder_css' );
 add_shortcode( 'tweetherder', 'tweet_herder' );
 add_action('init', 'tweetherder_button');
+
+/**
+ * plugin activation code
+ */
+function tweetherder_create_options() {
+    $options = array(
+      'twitter_name' => 'TriKro',
+      'custom_css' => ''
+    );
+    $dbOptions = get_option("tweetherder_options");
+    if(!empty($dbOptions)) {
+      foreach($dbOptions as $key => $option) {
+        $options[$key] = $option;
+      }
+    }
+    update_option("tweetherder_options", $options);
+}
+
+register_activation_hook(__FILE__, 'tweetherder_database_init_options');
+
+/**
+ * admin code
+ */
+if ( is_admin() ) {
+	require_once(plugin_dir_path(__FILE__).'/includes/admin.php' );
+	add_action('admin_menu', 'tweetherder_admin_menu');
+	add_action('admin_init', 'tweetherder_admin_init');
+}
+
+?>
