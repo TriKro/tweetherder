@@ -47,7 +47,10 @@ function tweetherder_options_page() {
 	<div class="wrap">
 		<?php screen_icon(); ?>
 		<h2>TweetHerder</h2>
-		<form action="options.php" method="post">
+		
+		<?php include(plugin_dir_path(__FILE__).'/../template/feedback.php'); ?>
+
+		<form style="float: left; width: 70%;" action="options.php" method="post">
 			<?php
 				settings_fields('tweetherder_options');
 				do_settings_sections('tweetherder');
