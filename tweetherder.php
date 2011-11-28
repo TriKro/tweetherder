@@ -1,10 +1,10 @@
 <?php
 /**
- * @package Tweet Herder
+ * @package TweetHerder
  * @version 1.0
  */
 /*
-Plugin Name: Tweet Herder
+Plugin Name: TweetHerder
 Plugin URI: http://grasshopperherder.com/
 Description: Adds TinyMCE button for Tweeting selected text in a post.
 Author: Travis Vocino, Tristan Kromer, Peter Backx
@@ -24,11 +24,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
-*/
-
-/**
-  Set this to your tweet username.
-  This is the only thing that needs to be set.
 */
 
 /**
