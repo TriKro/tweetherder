@@ -37,14 +37,15 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
 function tweet_herder( $atts, $content = null ) {
   extract( shortcode_atts( array (
-    'href' => get_permalink( $post->ID )
+    'href' => get_permalink( $post->ID ),
+    'text' => $content
   ), $atts ) );
   
   $options     = get_option('tweetherder_options');
   $twittername = $options['twitter_name'];
   $custom_css  = $options['custom_css'];
   
-  $share_link  = "http://twitter.com/share?url=$href&text=$content&via=$twittername&related=$twittername";
+  $share_link  = "http://twitter.com/share?url=$href&text=$text&via=$twittername&related=$twittername";
   $style_attr  = empty($custom_css) ? '' : 'style="' . $custom_css . '"';
   
   return '<a href="'. $share_link . '" rel="nofollow" title="Click here to tweet this." target="_blank" class="tweetherder" '. $style_attr . ' >'.$content.'</a>';
@@ -120,7 +121,7 @@ function tweetherder_create_options() {
     update_option("tweetherder_options", $options);
 }
 
-register_activation_hook(__FILE__, 'tweetherder_database_init_options');
+register_activation_hook(__FILE__, 'tweetherder_create_options');
 
 /**
  * admin code
