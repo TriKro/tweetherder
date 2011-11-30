@@ -1,8 +1,8 @@
 === TweetHerder ===
 
-Contributors: Travis Vocino, trikro, pbackx
+Contributors: vocino, trikro, pbackx
 Donate link: http://grasshopperherder.com/
-Tags: plugin, widget, automatic, ad, manage
+Tags: plugin, twitter, tweet, shortcode
 Requires at least: 3.0
 Tested up to: 3.2.1
 Stable tag: 1.0
