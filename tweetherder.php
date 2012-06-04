@@ -43,7 +43,7 @@ function tweet_herder( $atts, $content = null ) {
   $share_link  = "http://twitter.com/share?url=$href&text=$text&via=$twittername&related=$twittername";
   $style_attr  = empty($custom_css) ? '' : 'style="' . $custom_css . '"';
   
-  return '<a href="'. $share_link . '" rel="nofollow" title="Click here to tweet this." target="_blank" class="tweetherder" '. $style_attr . ' >'.$content.'</a>';
+  return wpautop('<a href="'. $share_link . '" rel="nofollow" title="Click here to tweet this." target="_blank" class="tweetherder" '. $style_attr . ' >'.$content.'</a>');
 }
 
 /**
