@@ -84,7 +84,7 @@ function add_plugin( $plugin_array ) {
 function tweetherder_css() {
   echo "<style type='text/css'>
       a.tweetherder {
-        padding-right: 47px !important;
+        padding-right: 52px !important;
         background: url(".WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__)) ."retweet.png) no-repeat right center !important;
       }
     </style>
