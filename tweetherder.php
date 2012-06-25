@@ -39,7 +39,8 @@ function tweet_herder( $atts, $content = null ) {
   $options     = get_option('tweetherder_options');
   $twittername = $options['twitter_name'];
   $custom_css  = $options['custom_css'];
-  
+  $text        = urlencode($text);
+    
   $share_link  = "http://twitter.com/share?url=$href&text=$text&via=$twittername&related=$twittername";
   $style_attr  = empty($custom_css) ? '' : 'style="' . $custom_css . '"';
   

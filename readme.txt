@@ -48,6 +48,10 @@ Yes you can.
 
 == Changelog ==
 
+= Version 1.x =
+
+* URL encode the text, so hashtags work correctly
+
 = Version 1.0 =
 
 * Initial version.
