@@ -31,6 +31,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 */
 
 function tweet_herder( $atts, $content = null ) {
+  global $tweetherder_shortcode_added;
+  $tweetherder_shortcode_added = true;
+
   extract( shortcode_atts( array (
     'href' => get_permalink( $post->ID ),
     'text' => $content
@@ -48,36 +51,24 @@ function tweet_herder( $atts, $content = null ) {
 }
 
 /**
-  Create the Initialization Function
+  Register TweetHerder Javascript
 */
- 
-function tweetherder_button() {
-  if ( ! current_user_can('edit_posts') && ! current_user_can('edit_pages') ) {
-    return;
-  }
-  if ( get_user_option('rich_editing') == 'true' ) {
-   add_filter( 'mce_external_plugins', 'add_plugin' );
-   add_filter( 'mce_buttons', 'register_button' );
-  }
+function tweetherder_register_script() {
+  wp_register_script('tweetherder', plugins_url('js/tweetherder.js', __FILE__), array('jquery'), '1.0', true);
 }
+add_action('init','tweetherder_register_script');
 
 /**
-  Register the MCE Button
+  Add JavaScript when shortcode is used
 */
- 
-function register_button( $buttons ) {
-  array_push( $buttons, "|", "tweetherder" );
-  return $buttons;
+function tweetherder_load_javascript() {
+  global $tweetherder_shortcode_added;
+  if($tweetherder_shortcode_added) {
+    wp_print_scripts('tweetherder');
+  }
 }
+add_action('wp_footer', 'tweetherder_load_javascript');
 
-/**
-  Register TinyMCE Plugin
-*/
- 
-function add_plugin( $plugin_array ) {
-  $plugin_array['tweetherder'] = WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__)) . 'tweetherder.js';
-  return $plugin_array;
-}
 
 /**
   CSS for the Link
@@ -98,7 +89,6 @@ function tweetherder_css() {
 
 add_action( 'wp_head', 'tweetherder_css' );
 add_shortcode( 'tweetherder', 'tweet_herder' );
-add_action('init', 'tweetherder_button');
 
 /**
  * plugin activation code
@@ -106,7 +96,8 @@ add_action('init', 'tweetherder_button');
 function tweetherder_create_options() {
     $options = array(
       'twitter_name' => 'TriKro',
-      'custom_css' => ''
+      'custom_css' => '',
+      'analytics' => '0'
     );
     $dbOptions = get_option("tweetherder_options");
     if(!empty($dbOptions)) {
@@ -126,6 +117,7 @@ if ( is_admin() ) {
 	require_once(plugin_dir_path(__FILE__).'/includes/admin.php' );
 	add_action('admin_menu', 'tweetherder_admin_menu');
 	add_action('admin_init', 'tweetherder_admin_init');
+	add_action('init', 'tweetherder_button');
 }
 
 ?>

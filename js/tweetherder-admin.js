@@ -3,7 +3,7 @@
         init : function(ed, url) {
             ed.addButton('tweetherder', {
                 title : 'TweetHerder',
-                image : url+'/twitter.png',
+                image : url+'/../twitter.png',
                 onclick : function() {
                      ed.selection.setContent('[tweetherder]' + ed.selection.getContent() + '[/tweetherder]');
  
