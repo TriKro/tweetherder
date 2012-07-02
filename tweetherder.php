@@ -59,11 +59,15 @@ function tweetherder_register_script() {
 add_action('init','tweetherder_register_script');
 
 /**
-  Add JavaScript when shortcode is used
+  Add JavaScript when shortcode is used and tracking enabled
 */
 function tweetherder_load_javascript() {
   global $tweetherder_shortcode_added;
-  if($tweetherder_shortcode_added) {
+  
+  $options   = get_option('tweetherder_options');
+  $analytics = $options['analytics'];
+
+  if($tweetherder_shortcode_added && $analytics) {
     wp_print_scripts('tweetherder');
   }
 }
