@@ -4,7 +4,7 @@ Contributors: vocino, trikro, pbackx
 Donate link: http://grasshopperherder.com/
 Tags: plugin, twitter, tweet, shortcode, tweetable
 Requires at least: 3.0
-Tested up to: 3.2.1
+Tested up to: 3.4.1
 Stable tag: 1.1
 
 
